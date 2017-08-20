@@ -32,26 +32,38 @@ namespace DNSChanger
         {
             InitializeComponent();
             Add_Info();
-            Primary_Server_Label_Title.Enabled = false;
-            Secondary_Server_Label_Title.Enabled = false;
+            Primary_Server_Label_Title.Visible = false;
+            Secondary_Server_Label_Title.Visible = false;
             Adapters_ComboBox.SelectedIndex = 0;
         }
 
 
         private void Add_Info()
         {
+            string DNS_Info = "";
+            string DNS_Info_Aux = "";
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
             {
                 Adapters_ComboBox.Items.Add(adapter.Name);
                 IPAddressCollection dnsServers = adapter.GetIPProperties().DnsAddresses;
-                Console.WriteLine(adapter.Name);
+                DNS_Info = DNS_Info + "- " + adapter.Name + "\r\n";
                 foreach (IPAddress dns in dnsServers)
                 {
-                    Console.WriteLine(dns.ToString());
+                    if (!dns.ToString().Contains("fec0:0:0:ffff::"))
+                    {
+                        DNS_Info_Aux = DNS_Info_Aux + dns.ToString() + "\r\n";
+                    }
+                    
+                    if (DNS_Info_Aux.Count() == 0)
+                    {
+                        DNS_Info_Aux = "DHCP - Automatic" + "\r\n";
+                    }
                 }
+                DNS_Info = DNS_Info + DNS_Info_Aux + "\r\n";
+                DNS_Info_Aux = "";
             }
-
+            DNS_Text_Box.Text = DNS_Info;
             Server_One.Text = Server_One_Name;
             Server_Two.Text = Server_Two_Name;
             Server_Three.Text = Server_Three_Name;
@@ -94,11 +106,13 @@ namespace DNSChanger
             if (Server_Secondary.CompareTo("") == 0)
             {
                 Run_Command("netsh interface ipv4 set dnsservers " + '"' + Adapter_Selected + '"' + " static " + Server_Primary + " primary");
+                Add_Info();
                 Apply.Enabled = true;
                 return;
             }
             Run_Command("netsh interface ipv4 set dnsservers " + '"' + Adapter_Selected + '"' + " static " + Server_Primary + " primary");
             Run_Command("netsh interface ipv4 add dnsserver " + '"' + Adapter_Selected + '"' + " address=" + Server_Secondary + " index=2");
+            Add_Info();
             Apply.Enabled = true;
         }
 
@@ -122,13 +136,13 @@ namespace DNSChanger
             if (Server_Primary.CompareTo("") == 0)
             {
                 Server_Primary = Server_IP;
-                Primary_Server_Label_Title.Enabled = true;
+                Primary_Server_Label_Title.Visible = true;
                 Primary_Server_Label_Name.Text = Server_Name;
             }
             else if (Server_Secondary.CompareTo("") == 0)
             {
                 Server_Secondary = Server_IP;
-                Secondary_Server_Label_Title.Enabled = true;
+                Secondary_Server_Label_Title.Visible = true;
                 Secondary_Server_Label_Name.Text = Server_Name;
             }
         }
@@ -136,10 +150,10 @@ namespace DNSChanger
         private void Cancel_Selection_Click(object sender, EventArgs e)
         {
             Server_Primary = "";
-            Primary_Server_Label_Title.Enabled = false;
+            Primary_Server_Label_Title.Visible = false;
             Primary_Server_Label_Name.Text = "";
             Server_Secondary = "";
-            Secondary_Server_Label_Title.Enabled = false;
+            Secondary_Server_Label_Title.Visible = false;
             Secondary_Server_Label_Name.Text = "";
         }
     }

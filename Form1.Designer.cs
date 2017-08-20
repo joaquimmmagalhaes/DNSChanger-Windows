@@ -42,6 +42,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.Primary_Server_Label_Name = new System.Windows.Forms.Label();
             this.Secondary_Server_Label_Name = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DNS_Text_Box = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -135,7 +137,7 @@
             // Primary_Server_Label_Title
             // 
             this.Primary_Server_Label_Title.AutoSize = true;
-            this.Primary_Server_Label_Title.Location = new System.Drawing.Point(10, 186);
+            this.Primary_Server_Label_Title.Location = new System.Drawing.Point(10, 179);
             this.Primary_Server_Label_Title.Name = "Primary_Server_Label_Title";
             this.Primary_Server_Label_Title.Size = new System.Drawing.Size(75, 13);
             this.Primary_Server_Label_Title.TabIndex = 9;
@@ -144,7 +146,7 @@
             // Secondary_Server_Label_Title
             // 
             this.Secondary_Server_Label_Title.AutoSize = true;
-            this.Secondary_Server_Label_Title.Location = new System.Drawing.Point(10, 199);
+            this.Secondary_Server_Label_Title.Location = new System.Drawing.Point(10, 192);
             this.Secondary_Server_Label_Title.Name = "Secondary_Server_Label_Title";
             this.Secondary_Server_Label_Title.Size = new System.Drawing.Size(92, 13);
             this.Secondary_Server_Label_Title.TabIndex = 10;
@@ -162,7 +164,7 @@
             // Primary_Server_Label_Name
             // 
             this.Primary_Server_Label_Name.AutoSize = true;
-            this.Primary_Server_Label_Name.Location = new System.Drawing.Point(108, 185);
+            this.Primary_Server_Label_Name.Location = new System.Drawing.Point(108, 178);
             this.Primary_Server_Label_Name.Name = "Primary_Server_Label_Name";
             this.Primary_Server_Label_Name.Size = new System.Drawing.Size(0, 13);
             this.Primary_Server_Label_Name.TabIndex = 12;
@@ -170,16 +172,36 @@
             // Secondary_Server_Label_Name
             // 
             this.Secondary_Server_Label_Name.AutoSize = true;
-            this.Secondary_Server_Label_Name.Location = new System.Drawing.Point(108, 199);
+            this.Secondary_Server_Label_Name.Location = new System.Drawing.Point(108, 192);
             this.Secondary_Server_Label_Name.Name = "Secondary_Server_Label_Name";
             this.Secondary_Server_Label_Name.Size = new System.Drawing.Size(0, 13);
             this.Secondary_Server_Label_Name.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(288, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Current DNS";
+            // 
+            // DNS_Text_Box
+            // 
+            this.DNS_Text_Box.Location = new System.Drawing.Point(241, 79);
+            this.DNS_Text_Box.Multiline = true;
+            this.DNS_Text_Box.Name = "DNS_Text_Box";
+            this.DNS_Text_Box.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DNS_Text_Box.Size = new System.Drawing.Size(160, 126);
+            this.DNS_Text_Box.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 261);
+            this.ClientSize = new System.Drawing.Size(413, 261);
+            this.Controls.Add(this.DNS_Text_Box);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Secondary_Server_Label_Name);
             this.Controls.Add(this.Primary_Server_Label_Name);
             this.Controls.Add(this.label4);
@@ -218,6 +240,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label Primary_Server_Label_Name;
         private System.Windows.Forms.Label Secondary_Server_Label_Name;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox DNS_Text_Box;
     }
 }
 
