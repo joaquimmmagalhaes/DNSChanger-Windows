@@ -4,10 +4,10 @@
 # Images
 
 ## Change DNS Server
-![alt text](https://joaquimmagalhaes.pt/IMG_5.png "View Servers")
+![alt text](https://joaquimmagalhaes.pt/IMG_5.jpg "View Servers")
 
 ## Manage Servers Configuration
-![alt text](https://joaquimmagalhaes.pt/IMG_4.png "Manage Servers")
+![alt text](https://joaquimmagalhaes.pt/IMG_4.jpg "Manage Servers")
 
 
 # Notes!
