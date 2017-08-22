@@ -10,33 +10,128 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Net;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using System.Collections;
 
 namespace DNSChanger
 {
     public partial class Form1 : Form
     {
-
+        RegistryKey key = Registry.LocalMachine.OpenSubKey("Software", true);
         private string Adapter_Selected = "";
         private string Server_Primary = "";
         private string Server_Secondary = "";
-        private string Server_One_Name = "Google";
-        private string Server_One_IP = "8.8.8.8";
-        private string Server_Two_Name = "OpenDNS";
-        private string Server_Two_IP = "208.67.222.222";
-        private string Server_Three_Name = "Comodo";
-        private string Server_Three_IP = "8.26.56.26";
-        private string Server_Four_Name = "SafeDNS";
-        private string Server_Four_IP = "195.46.39.39";
+        private string Server_One_Name = "";
+        private string Server_One_IP = "";
+        private string Server_Two_Name = "";
+        private string Server_Two_IP = "";
+        private string Server_Three_Name = "";
+        private string Server_Three_IP = "";
+        private string Server_Four_Name = "";
+        private string Server_Four_IP = "";
 
         public Form1()
         {
             InitializeComponent();
+            Init_Program();
+        }
+
+        private void Init_Program()
+        {
+            key = key.OpenSubKey("DNSChanger", true);
+            if (key == null)
+            {
+                key = Registry.LocalMachine.OpenSubKey("Software", true).CreateSubKey("DNSChanger");
+            }
+            key = key.OpenSubKey("Servers", true);
+            if (key == null)
+            {
+                key = Registry.LocalMachine.OpenSubKey("Software", true).CreateSubKey("DNSChanger").CreateSubKey("Servers");
+                key.SetValue("Servers", First_Run());
+            }
+            string Servers_JSON = (string) key.GetValue("Servers");
+            List<Server> servers = JsonConvert.DeserializeObject<List<Server>>(Servers_JSON);
+            Server Server_1 = Get_Server(servers, 0), Server_2 = Get_Server(servers, 1),
+                Server_3 = Get_Server(servers, 2), Server_4 = Get_Server(servers, 3);
+            if (Server_1 != null)
+            {
+                Server_One.Visible = true;
+                Server_One_Name = Server_1.Name;
+                Server_One_IP = Server_1.IP;
+            }
+            else
+            {
+                Server_One.Visible = false;
+            }
+       
+            if (Server_2 != null)
+            {
+                Server_Two.Visible = true;
+                Server_Two_Name = Server_2.Name;
+                Server_Two_IP = Server_2.IP;
+            }
+            else
+            {
+                Server_Two.Visible = false;
+            }
+
+            if (Server_3 != null)
+            {
+                Server_Three.Visible = true;
+                Server_Three_Name = Server_3.Name;
+                Server_Three_IP = Server_3.IP;
+            }
+            else
+            {
+                Server_Three.Visible = false;
+            }
+
+            if (Server_4 != null)
+            {
+                Server_Four.Visible = true;
+                Server_Four_Name = Server_4.Name;
+                Server_Four_IP = Server_4.IP;
+            }
+            else
+            {
+                Server_Four.Visible = false;
+            }
+
+
+
+
             Add_Info();
             Primary_Server_Label_Title.Visible = false;
             Secondary_Server_Label_Title.Visible = false;
             Adapters_ComboBox.SelectedIndex = 0;
         }
 
+
+        private Server Get_Server(List<Server> Servers, int Pos)
+        {
+            int i = 0;
+            foreach(Server Aux in Servers)
+            {
+                if (i++ == Pos)
+                {
+                    return Aux;
+                }
+            }
+            return null;
+        }
+
+
+        private string First_Run()
+        {
+            List<Server> servers = new List<Server>();
+            servers.Add(new Server("Google", "8.8.8.8"));
+            servers.Add(new Server("OpenDNS", "208.67.222.222"));
+            servers.Add(new Server("Comodo", "8.26.56.26"));
+            servers.Add(new Server("SafeDNS", "195.46.39.39"));
+        
+            return JsonConvert.SerializeObject(servers);
+        }
 
         private void Add_Info()
         {
@@ -155,6 +250,13 @@ namespace DNSChanger
             Server_Secondary = "";
             Secondary_Server_Label_Title.Visible = false;
             Secondary_Server_Label_Name.Text = "";
+        }
+
+        private void Edit_Servers_Click(object sender, EventArgs e)
+        {
+            Servers form = new Servers();
+            form.ShowDialog();
+            Init_Program();
         }
     }
 }

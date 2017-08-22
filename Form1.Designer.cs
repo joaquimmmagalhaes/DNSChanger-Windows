@@ -45,6 +45,7 @@
             this.Secondary_Server_Label_Name = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.DNS_Text_Box = new System.Windows.Forms.TextBox();
+            this.Edit_Servers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -196,11 +197,22 @@
             this.DNS_Text_Box.Size = new System.Drawing.Size(160, 126);
             this.DNS_Text_Box.TabIndex = 15;
             // 
+            // Edit_Servers
+            // 
+            this.Edit_Servers.Location = new System.Drawing.Point(291, 226);
+            this.Edit_Servers.Name = "Edit_Servers";
+            this.Edit_Servers.Size = new System.Drawing.Size(114, 23);
+            this.Edit_Servers.TabIndex = 17;
+            this.Edit_Servers.Text = "Edit Servers";
+            this.Edit_Servers.UseVisualStyleBackColor = true;
+            this.Edit_Servers.Click += new System.EventHandler(this.Edit_Servers_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 261);
+            this.Controls.Add(this.Edit_Servers);
             this.Controls.Add(this.DNS_Text_Box);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Secondary_Server_Label_Name);
@@ -244,6 +256,7 @@
         private System.Windows.Forms.Label Secondary_Server_Label_Name;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox DNS_Text_Box;
+        private System.Windows.Forms.Button Edit_Servers;
     }
 }
 
