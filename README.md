@@ -3,14 +3,11 @@
 
 # Images
 
-## Change DNS
-![alt text](https://joaquimmagalhaes.pt/IMG_1.png "Change DNS")
+## Change DNS Server
+![alt text](https://joaquimmagalhaes.pt/IMG_5.png "View Servers")
 
-## Choose Adapter
-![alt text](https://joaquimmagalhaes.pt/IMG_2.jpg "View Adapters")
-
-## View current adapters config
-![alt text](https://joaquimmagalhaes.pt/IMG_3.png "View Servers")
+## Manage Servers Configuration
+![alt text](https://joaquimmagalhaes.pt/IMG_4.png "Manage Servers")
 
 
 # Notes!
